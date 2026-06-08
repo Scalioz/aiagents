@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Rahul — AI Clinic Appointment Agent | Scalioz</title>
+<meta name="description" content="Meet Rahul, Scalioz's AI appointment booking agent for clinics. Books slots, sends confirmations, handles rescheduling — 24/7 automatically."/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Jost:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --navy: #0A1860; --blue: #1A3CFF; --cyan: #00C8FF;
+  --white: #ffffff; --gray-50: #f8fafc; --gray-200: #e2e8f0;
+  --gray-500: #64748b; --gray-900: #0f172a; --radius: 16px;
+  --green: #10b981;
+}
+body { font-family: 'Jost', system-ui, sans-serif; background: var(--gray-50); color: var(--gray-900); line-height: 1.6; min-height: 100vh; }
+
+/* NAV */
+nav { background: white; border-bottom: 1px solid var(--gray-200); padding: 0 2rem; height: 64px; display: flex; align-items: center; justify-content: space-between; position: sticky; top: 0; z-index: 100; box-shadow: 0 1px 12px rgba(0,0,0,.06); }
+.nav-logo { display: flex; align-items: center; gap: .75rem; text-decoration: none; }
+.nav-back { color: var(--navy); text-decoration: none; font-size: .85rem; font-weight: 600; display: flex; align-items: center; gap: .4rem; }
+.nav-back:hover { color: var(--blue); }
+.nav-cta { background: linear-gradient(135deg, var(--navy), var(--blue)); color: white; padding: .5rem 1.25rem; border-radius: 50px; font-size: .82rem; font-weight: 700; text-decoration: none; }
+
+/* HERO */
+.hero { background: linear-gradient(135deg, #0A1860 0%, #1A3CFF 60%, #00a8d6 100%); color: white; padding: 3rem 2rem; text-align: center; position: relative; overflow: hidden; }
+.hero::before { content: ''; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: rgba(0,200,255,.06); top: -100px; right: -100px; }
+.hero::after { content: ''; position: absolute; width: 300px; height: 300px; border-radius: 50%; background: rgba(255,255,255,.03); bottom: -80px; left: -80px; }
+.agent-badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); padding: .35rem 1rem; border-radius: 50px; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1.5rem; }
+.agent-avatar-lg { width: 90px; height: 90px; border-radius: 50%; background: rgba(255,255,255,.12); border: 3px solid rgba(0,200,255,.5); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1rem; position: relative; z-index: 1; }
+.status-live { display: inline-flex; align-items: center; gap: .4rem; background: rgba(16,185,129,.15); border: 1px solid rgba(16,185,129,.4); padding: .25rem .75rem; border-radius: 50px; font-size: .72rem; font-weight: 700; color: #6ee7b7; margin-bottom: 1rem; }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
+.hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: .5rem; position: relative; z-index: 1; }
+.hero h1 span { color: var(--cyan); }
+.hero-sub { color: rgba(255,255,255,.75); max-width: 500px; margin: 0 auto 1.5rem; font-size: .95rem; position: relative; z-index: 1; }
+.hero-tags { display: flex; gap: .5rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+.hero-tag { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); padding: .3rem .8rem; border-radius: 50px; font-size: .72rem; font-weight: 600; }
+
+/* MAIN LAYOUT */
+.main-wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: 1fr 420px; gap: 2.5rem; align-items: start; }
+
+/* INFO PANEL */
+.info-panel {}
+.info-panel h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--navy); margin-bottom: 1rem; }
+.how-it-works { background: white; border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 1.5rem; margin-bottom: 1.5rem; }
+.how-it-works h3 { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--blue); margin-bottom: 1.25rem; }
+.step { display: flex; gap: 1rem; margin-bottom: 1.1rem; align-items: flex-start; }
+.step:last-child { margin-bottom: 0; }
+.step-num { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--blue)); color: white; font-size: .78rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.step-text strong { display: block; font-size: .88rem; font-weight: 700; color: var(--navy); margin-bottom: .15rem; }
+.step-text span { font-size: .8rem; color: var(--gray-500); }
+
+.use-cases { background: white; border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 1.5rem; margin-bottom: 1.5rem; }
+.use-cases h3 { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--blue); margin-bottom: 1rem; }
+.use-case-grid { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+.use-case { background: var(--gray-50); border-radius: 10px; padding: .75rem; }
+.use-case .uc-icon { font-size: 1.4rem; margin-bottom: .35rem; }
+.use-case strong { display: block; font-size: .8rem; font-weight: 700; color: var(--navy); }
+.use-case span { font-size: .74rem; color: var(--gray-500); }
+
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.stat-box { background: white; border-radius: 12px; border: 1px solid var(--gray-200); padding: 1rem; text-align: center; }
+.stat-box strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; color: var(--blue); }
+.stat-box span { font-size: .72rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: .06em; }
+
+.cta-box { background: linear-gradient(135deg, var(--navy), var(--blue)); border-radius: var(--radius); padding: 1.5rem; color: white; text-align: center; }
+.cta-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: .5rem; }
+.cta-box p { font-size: .82rem; color: rgba(255,255,255,.75); margin-bottom: 1rem; }
+.btn-wa-main { display: inline-flex; align-items: center; gap: .5rem; background: #25D366; color: white; padding: .75rem 1.5rem; border-radius: 50px; font-weight: 700; font-size: .85rem; text-decoration: none; }
+.btn-wa-main:hover { opacity: .9; }
+
+/* CHAT WIDGET */
+.chat-panel { position: sticky; top: 80px; }
+.chat-container { background: white; border-radius: 20px; border: 1px solid var(--gray-200); overflow: hidden; box-shadow: 0 8px 40px rgba(10,24,96,.12); }
+.chat-header { background: linear-gradient(135deg, var(--navy), var(--blue)); padding: 1rem 1.25rem; display: flex; align-items: center; gap: .85rem; }
+.chat-avatar { width: 42px; height: 42px; border-radius: 50%; background: rgba(255,255,255,.15); border: 2px solid rgba(0,200,255,.4); display: flex; align-items: center; justify-content: center; font-size: 1.2rem; }
+.chat-header-info .name { color: white; font-weight: 700; font-size: .95rem; }
+.chat-header-info .status { color: #6ee7b7; font-size: .72rem; display: flex; align-items: center; gap: .3rem; }
+.chat-messages { height: 420px; overflow-y: auto; padding: 1rem; display: flex; flex-direction: column; gap: .65rem; background: #f6f7fb; }
+.chat-messages::-webkit-scrollbar { width: 4px; }
+.chat-messages::-webkit-scrollbar-thumb { background: #d0d4e8; border-radius: 4px; }
+.msg-row { display: flex; flex-direction: column; }
+.msg-row.bot { align-items: flex-start; }
+.msg-row.user { align-items: flex-end; }
+.msg-bubble { max-width: 85%; padding: .7rem .9rem; border-radius: 14px; font-size: .84rem; line-height: 1.55; animation: fadeUp .2s ease; }
+@keyframes fadeUp { from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)} }
+.msg-row.bot .msg-bubble { background: white; color: var(--gray-900); border-bottom-left-radius: 4px; box-shadow: 0 1px 6px rgba(10,24,96,.07); }
+.msg-row.user .msg-bubble { background: linear-gradient(135deg, var(--blue), #0A40E0); color: white; border-bottom-right-radius: 4px; }
+.quick-replies { display: flex; flex-wrap: wrap; gap: .4rem; margin-top: .5rem; }
+.qr-btn { background: white; border: 1.5px solid var(--blue); color: var(--blue); border-radius: 20px; padding: .35rem .85rem; font-size: .76rem; font-weight: 600; cursor: pointer; transition: all .15s; font-family: 'Jost', sans-serif; white-space: nowrap; }
+.qr-btn:hover { background: var(--blue); color: white; }
+.typing { display: flex; align-items: center; gap: .3rem; padding: .6rem .9rem; background: white; border-radius: 14px; border-bottom-left-radius: 4px; width: fit-content; box-shadow: 0 1px 6px rgba(10,24,96,.07); }
+.typing span { width: 7px; height: 7px; border-radius: 50%; background: var(--blue); animation: bounce 1.2s infinite; }
+.typing span:nth-child(2) { animation-delay: .2s; }
+.typing span:nth-child(3) { animation-delay: .4s; }
+@keyframes bounce { 0%,80%,100%{transform:scale(0.8);opacity:.5}40%{transform:scale(1.1);opacity:1} }
+.chat-input-area { padding: .75rem; background: white; border-top: 1px solid var(--gray-200); display: flex; gap: .5rem; align-items: flex-end; }
+.chat-input { flex: 1; border: 1.5px solid var(--gray-200); border-radius: 12px; padding: .65rem .9rem; font-size: .84rem; resize: none; outline: none; max-height: 80px; line-height: 1.4; font-family: 'Jost', sans-serif; background: #fafbff; color: var(--gray-900); transition: border-color .2s; }
+.chat-input:focus { border-color: var(--blue); background: white; }
+.chat-input::placeholder { color: #b0b6d0; }
+.send-btn { width: 38px; height: 38px; border-radius: 50%; background: linear-gradient(135deg, var(--blue), var(--cyan)); border: none; cursor: pointer; display: flex; align-items: center; justify-content: center; flex-shrink: 0; transition: opacity .15s; }
+.send-btn:hover { opacity: .85; }
+.send-btn:disabled { opacity: .4; }
+.chat-disclaimer { text-align: center; font-size: .7rem; color: var(--gray-500); padding: .5rem; background: white; }
+
+/* FOOTER */
+.site-footer { background: #0d0f1a; color: #fff; padding: 56px 40px 0; margin-top: 4rem; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; max-width: 1100px; margin: 0 auto 40px; }
+.footer-brand-col .footer-logo { height: 44px; display: block; margin-bottom: 14px; }
+.footer-brand-col .company-name { font-size: 13px; font-weight: 700; color: #00C8FF; margin-bottom: 4px; }
+.footer-brand-col .company-sub { font-size: 11px; color: #888; margin-bottom: 14px; }
+.footer-brand-col p { font-size: 12px; color: #aaa; line-height: 1.7; margin-bottom: 18px; }
+.footer-social { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 20px; }
+.footer-social a { display: flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 8px; background: #1a1d2e; border: 1px solid #2a2d3e; transition: background .2s; }
+.footer-social a:hover { background: #1A3CFF; }
+.footer-social a svg { width: 16px; height: 16px; fill: #aaa; }
+.footer-social a:hover svg { fill: #fff; }
+.footer-newsletter p { font-size: 12px; color: #aaa; margin-bottom: 10px; }
+.newsletter-form { display: flex; gap: 6px; }
+.newsletter-form input { flex: 1; background: #1a1d2e; border: 1px solid #2a2d3e; border-radius: 6px; padding: 8px 12px; color: #fff; font-size: 12px; outline: none; }
+.newsletter-form input::placeholder { color: #555; }
+.newsletter-form button { background: #1A3CFF; color: #fff; border: none; border-radius: 6px; padding: 8px 14px; font-size: 12px; font-weight: 700; cursor: pointer; }
+.footer-col h4 { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 14px; text-transform: uppercase; letter-spacing: .06em; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 9px; }
+.footer-col ul li a { color: #888; text-decoration: none; font-size: 12px; transition: color .2s; }
+.footer-col ul li a:hover { color: #00C8FF; }
+.footer-divider { border: none; border-top: 1px solid #1e2030; max-width: 1100px; margin: 0 auto; }
+.footer-bottom { max-width: 1100px; margin: 0 auto; padding: 20px 0 24px; display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center; }
+.footer-bottom .copyright { font-size: 12px; color: #444; font-weight: 600; }
+.footer-bottom .copyright span { color: #666; }
+.footer-bottom .powered { font-size: 11px; color: #333; }
+.footer-bottom .powered b { color: #555; }
+
+@media (max-width: 900px) {
+  .main-wrap { grid-template-columns: 1fr; }
+  .chat-panel { position: static; }
+  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+}
+@media (max-width: 600px) {
+  .use-case-grid { grid-template-columns: 1fr; }
+  .stats-row { grid-template-columns: 1fr; }
+  .site-footer { padding: 40px 20px 0; }
+  .footer-top { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a class="nav-logo" href="/">
+    <img src="https://websites.scalioz.com/assets/logo.png" alt="Scalioz" style="height:45px;width:auto;object-fit:contain;">
+  </a>
+  <div style="display:flex;align-items:center;gap:1.5rem;">
+    <a class="nav-back" href="/">← All Agents</a>
+    <a class="nav-cta" href="https://wa.me/919043616100?text=Hi%20Scalioz!%20I%20want%20Rahul%20AI%20appointment%20agent%20for%20my%20clinic." target="_blank">🤖 Get Rahul for My Clinic</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="agent-badge">🏥 Clinic AI Agent · Scalioz Systems</div>
+  <div class="agent-avatar-lg">🤖</div>
+  <div class="status-live"><span class="status-dot"></span> Live Demo — Talk to Rahul Now</div>
+  <h1>Meet <span>Rahul</span></h1>
+  <p class="hero-sub">Your clinic's 24/7 AI appointment agent. Books slots, sends confirmations, handles rescheduling — so your staff doesn't have to.</p>
+  <div class="hero-tags">
+    <span class="hero-tag">📅 Slot Booking</span>
+    <span class="hero-tag">💬 WhatsApp Confirmations</span>
+    <span class="hero-tag">🗂️ HubSpot CRM</span>
+    <span class="hero-tag">🔄 Rescheduling</span>
+    <span class="hero-tag">⏰ 24hr Reminders</span>
+  </div>
+</div>
+
+<!-- MAIN -->
+<div class="main-wrap">
+
+  <!-- LEFT: INFO -->
+  <div class="info-panel">
+
+    <div class="stats-row">
+      <div class="stat-box"><strong>30–40%</strong><span>Leads Lost to Friction</span></div>
+      <div class="stat-box"><strong>24/7</strong><span>Always Available</span></div>
+      <div class="stat-box"><strong>20</strong><span>Max Slots Per Session</span></div>
+    </div>
+
+    <div class="how-it-works">
+      <h3>How Rahul Works</h3>
+      <div class="step">
+        <div class="step-num">1</div>
+        <div class="step-text">
+          <strong>Patient reaches out</strong>
+          <span>Via clinic website, WhatsApp, Meta ad, or Google ad — Rahul picks up instantly</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">2</div>
+        <div class="step-text">
+          <strong>Rahul qualifies & collects</strong>
+          <span>Name, phone, doctor preference, date & slot — one question at a time, conversationally</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">3</div>
+        <div class="step-text">
+          <strong>Checks slot availability</strong>
+          <span>Reads live from Google Sheet — max 20 per slot. Full? Offers next available automatically</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <div class="step-text">
+          <strong>Books & confirms instantly</strong>
+          <span>Writes to Google Sheet, sends WhatsApp confirmation to patient and alert to clinic owner</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">5</div>
+        <div class="step-text">
+          <strong>Pushes to HubSpot CRM</strong>
+          <span>Creates contact + deal with stage "Appointment Booked" — fresh clinic data every time</span>
+        </div>
+      </div>
+      <div class="step">
+        <div class="step-num">6</div>
+        <div class="step-text">
+          <strong>Sends 24hr reminder</strong>
+          <span>Automated WhatsApp reminder before the appointment — reduces no-shows significantly</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="use-cases">
+      <h3>Perfect For</h3>
+      <div class="use-case-grid">
+        <div class="use-case"><div class="uc-icon">🦷</div><strong>Dental Clinics</strong><span>OPD + specialist slots</span></div>
+        <div class="use-case"><div class="uc-icon">👁️</div><strong>Eye Hospitals</strong><span>Consultation booking</span></div>
+        <div class="use-case"><div class="uc-icon">🏥</div><strong>Multi-Specialty</strong><span>Department routing</span></div>
+        <div class="use-case"><div class="uc-icon">🧴</div><strong>Skin & Hair Clinics</strong><span>Treatment scheduling</span></div>
+        <div class="use-case"><div class="uc-icon">🤸</div><strong>Physio Centers</strong><span>Session management</span></div>
+        <div class="use-case"><div class="uc-icon">🧠</div><strong>Mental Health</strong><span>Private consultations</span></div>
+      </div>
+    </div>
+
+    <div class="cta-box">
+      <h3>Want Rahul for Your Clinic?</h3>
+      <p>We set up Rahul fully configured for your clinic — your doctors, your slots, your WhatsApp, your CRM. Ready in 48 hours.</p>
+      <a class="btn-wa-main" href="https://wa.me/919043616100?text=Hi%20Scalioz!%20I%20want%20Rahul%20AI%20appointment%20agent%20for%20my%20clinic.%20Please%20share%20details." target="_blank">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.524 5.847L0 24l6.335-1.509A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.015-1.376l-.36-.214-3.727.977.994-3.639-.234-.374A9.818 9.818 0 0112 2.182c5.428 0 9.818 4.39 9.818 9.818 0 5.429-4.39 9.818-9.818 9.818z"/></svg>
+        WhatsApp Us — Free Consultation
+      </a>
+    </div>
+
+  </div>
+
+  <!-- RIGHT: CHAT WIDGET -->
+  <div class="chat-panel">
+    <div class="chat-container">
+      <div class="chat-header">
+        <div class="chat-avatar">🤖</div>
+        <div class="chat-header-info">
+          <div class="name">Rahul</div>
+          <div class="status"><span class="status-dot" style="width:6px;height:6px;background:#6ee7b7;border-radius:50%;animation:pulse 2s infinite;"></span> Online · Clinic Appointment Agent</div>
+        </div>
+      </div>
+      <div class="chat-messages" id="chat-messages"></div>
+      <div class="chat-input-area">
+        <textarea class="chat-input" id="chat-input" rows="1" placeholder="Type your message…"></textarea>
+        <button class="send-btn" id="send-btn">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+        </button>
+      </div>
+      <div class="chat-disclaimer">🔒 Demo mode — no real booking is made</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-top">
+    <div class="footer-brand-col">
+      <img src="https://websites.scalioz.com/assets/logo.png" class="footer-logo" alt="Scalioz"/>
+      <div class="company-name">Scalioz — A Seociate Digital Business Solutions Company</div>
+      <div class="company-sub">Chennai, Tamil Nadu &nbsp;|&nbsp; info@scalioz.com &nbsp;|&nbsp; +91 90436 16100</div>
+      <p>Custom AI agents built for Indian businesses — clinic appointment booking, lead qualification, WhatsApp automation and CRM integration powered by n8n.</p>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/seociate" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a>
+        <a href="https://www.instagram.com/scalioz.systems/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg></a>
+        <a href="https://www.youtube.com/@seociate.digital" target="_blank" rel="noopener" aria-label="YouTube"><svg viewBox="0 0 24 24"><path d="M23.495 6.205a3.007 3.007 0 00-2.088-2.088c-1.87-.501-9.396-.501-9.396-.501s-7.507-.01-9.396.501A3.007 3.007 0 00.527 6.205a31.247 31.247 0 00-.522 5.805 31.247 31.247 0 00.522 5.783 3.007 3.007 0 002.088 2.088c1.868.502 9.396.502 9.396.502s7.506 0 9.396-.502a3.007 3.007 0 002.088-2.088 31.247 31.247 0 00.5-5.783 31.247 31.247 0 00-.5-5.805zM9.609 15.601V8.408l6.264 3.602z"/></svg></a>
+        <a href="https://www.linkedin.com/company/scalioz-systems" target="_blank" rel="noopener" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg></a>
+        <a href="https://wa.me/919043616100" target="_blank" rel="noopener" aria-label="WhatsApp"><svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347zM12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.524 5.847L0 24l6.335-1.509A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.015-1.376l-.36-.214-3.727.977.994-3.639-.234-.374A9.818 9.818 0 0112 2.182c5.428 0 9.818 4.39 9.818 9.818 0 5.429-4.39 9.818-9.818 9.818z"/></svg></a>
+      </div>
+      <div class="footer-newsletter">
+        <p>📧 Get weekly AI automation insights + new agent alerts — free.</p>
+        <div class="newsletter-form">
+          <input type="email" placeholder="Your email address" id="nl-email"/>
+          <button onclick="subscribeNewsletter()">Subscribe</button>
+        </div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Quick Links</h4>
+      <ul>
+        <li><a href="/">All AI Agents</a></li>
+        <li><a href="https://scalioz.com">Scalioz Home</a></li>
+        <li><a href="https://websites.scalioz.com">Our Websites</a></li>
+        <li><a href="https://tools.scalioz.com">Business Tools</a></li>
+        <li><a href="mailto:info@scalioz.com">Contact Us</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Agent Features</h4>
+      <ul>
+        <li><a href="#">Slot Booking</a></li>
+        <li><a href="#">WhatsApp Confirmations</a></li>
+        <li><a href="#">24hr Reminders</a></li>
+        <li><a href="#">Rescheduling</a></li>
+        <li><a href="#">HubSpot CRM Sync</a></li>
+        <li><a href="#">Google Sheets Log</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="https://tools.scalioz.com/terms.html">Terms of Service</a></li>
+        <li><a href="https://tools.scalioz.com/privacy-policy.html">Privacy Policy</a></li>
+        <li><a href="https://tools.scalioz.com/privacy-policy.html#cookies">Cookie Policy</a></li>
+      </ul>
+      <h4 style="margin-top:20px">Our Products</h4>
+      <ul>
+        <li><a href="https://websites.scalioz.com">Scalioz Websites</a></li>
+        <li><a href="https://tools.scalioz.com">Scalioz Tools</a></li>
+        <li><a href="/">Scalioz AI Agents</a></li>
+      </ul>
+    </div>
+  </div>
+  <hr class="footer-divider"/>
+  <div class="footer-bottom">
+    <div class="copyright">Copyright &copy; 2026 <span>Seociate Digital Business Solutions</span> — All Rights Reserved</div>
+    <div class="copyright" style="font-size:11px;color:#333;">Scalioz AI Agents is a product of Seociate Digital Business Solutions &nbsp;|&nbsp; Chennai, Tamil Nadu, India</div>
+    <div class="powered">Powered by: <b>Scalioz Systems</b></div>
+  </div>
+</footer>
+
+<script>
+// ── RAHUL DEMO CHAT ───────────────────────────────────────────
+// This is a DEMO simulation — replace WEBHOOK_URL with Rahul's
+// real n8n webhook to make it fully live.
+const WEBHOOK_URL = 'YOUR_RAHUL_N8N_WEBHOOK_URL';
+const USE_LIVE = false; // Set to true once webhook is configured
+
+const messagesEl = document.getElementById('chat-messages');
+const inputEl = document.getElementById('chat-input');
+const sendBtn = document.getElementById('send-btn');
+
+let conversationState = 'greeting';
+let collectedData = {};
+let userPhone = '';
+
+// Demo conversation flow (used when USE_LIVE = false)
+const demoFlow = {
+  greeting: {
+    bot: "👋 Hello! I'm Rahul, your clinic appointment assistant.\n\nI'm here to help you book an appointment quickly and easily. May I know your name please?",
+    qrs: [],
+    next: 'name'
+  },
+  name: {
+    bot: (input) => `Nice to meet you, ${input}! 😊\n\nWhich doctor or department would you like to consult?`,
+    qrs: ['👁 Eye / Ophthalmology', '🦷 Dental', '🧴 Skin & Hair', '🏥 General OPD', '🧠 Neurology'],
+    next: 'doctor'
+  },
+  doctor: {
+    bot: (input) => `Got it — ${input}. 👍\n\nWhat date would you prefer for the appointment?`,
+    qrs: ['📅 Today', '📅 Tomorrow', '📅 This Weekend'],
+    next: 'date'
+  },
+  date: {
+    bot: (input) => `${input} — noted! ✅\n\nWhich time slot works best for you?`,
+    qrs: ['🌅 Morning (9AM – 1PM)', '🌆 Evening (5PM – 9PM)'],
+    next: 'slot'
+  },
+  slot: {
+    bot: (input) => `Perfect! Let me check availability for the ${input} slot... ⏳`,
+    qrs: [],
+    next: 'checking'
+  },
+  checking: {
+    bot: () => `✅ Great news! The slot is available.\n\nI've noted your appointment details:\n📋 ${collectedData.doctor || 'Doctor'}\n📅 ${collectedData.date || 'Selected date'}\n⏰ ${collectedData.slot || 'Selected slot'}\n\nMay I have your WhatsApp number to send a confirmation?`,
+    qrs: [],
+    next: 'phone'
+  },
+  phone: {
+    bot: (input) => `Thank you! 🙏\n\nYour appointment has been booked!\n\n📲 A WhatsApp confirmation will be sent to ${input}.\n⏰ You'll also receive a reminder 24 hours before.\n\nIs there anything else I can help you with?`,
+    qrs: ['📅 Book Another Slot', '🔄 Reschedule', '❌ Cancel Appointment'],
+    next: 'done'
+  },
+  done: {
+    bot: () => `I'm happy to help! For any changes, just message me anytime. 😊\n\nWould you like Rahul set up for your clinic? Our team can configure him for your specific doctors, slots and WhatsApp in 48 hours!`,
+    qrs: ['💬 Talk to Scalioz Team'],
+    next: 'cta'
+  },
+  cta: {
+    bot: () => `Great! Click the WhatsApp button above to connect with our team. They'll set up Rahul for your clinic right away! 🚀`,
+    qrs: [],
+    next: 'end'
+  }
+};
+
+function addMessage(text, type, qrs = []) {
+  const row = document.createElement('div');
+  row.className = `msg-row ${type}`;
+
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+  bubble.innerHTML = text.replace(/\n/g, '<br>');
+  row.appendChild(bubble);
+
+  if (qrs.length && type === 'bot') {
+    const qrWrap = document.createElement('div');
+    qrWrap.className = 'quick-replies';
+    qrs.forEach(label => {
+      const btn = document.createElement('button');
+      btn.className = 'qr-btn';
+      btn.textContent = label;
+      btn.onclick = () => { qrWrap.remove(); sendMessage(label); };
+      qrWrap.appendChild(btn);
+    });
+    row.appendChild(qrWrap);
+  }
+
+  messagesEl.appendChild(row);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function showTyping() {
+  const typing = document.createElement('div');
+  typing.className = 'msg-row bot';
+  typing.id = 'typing-indicator';
+  typing.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+  messagesEl.appendChild(typing);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typing-indicator');
+  if (t) t.remove();
+}
+
+async function sendMessage(text) {
+  text = (text || inputEl.value).trim();
+  if (!text) return;
+  inputEl.value = '';
+  inputEl.style.height = 'auto';
+  addMessage(text, 'user');
+  sendBtn.disabled = true;
+
+  if (USE_LIVE && WEBHOOK_URL !== 'YOUR_RAHUL_N8N_WEBHOOK_URL') {
+    // Live mode — call real webhook
+    showTyping();
+    try {
+      const res = await fetch(WEBHOOK_URL, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message: text, phone: userPhone || 'demo', source: 'website_demo' })
+      });
+      const data = await res.json();
+      removeTyping();
+      addMessage(data.message || 'I received your message!', 'bot');
+    } catch(e) {
+      removeTyping();
+      addMessage('Sorry, I had a connection issue. Please try again!', 'bot');
+    }
+  } else {
+    // Demo mode — simulated responses
+    showTyping();
+    await new Promise(r => setTimeout(r, 900 + Math.random() * 600));
+    removeTyping();
+    runDemoStep(text);
+  }
+
+  sendBtn.disabled = false;
+}
+
+function runDemoStep(userInput) {
+  const step = demoFlow[conversationState];
+  if (!step) return;
+
+  // Collect data
+  if (conversationState === 'name') collectedData.name = userInput;
+  if (conversationState === 'doctor') collectedData.doctor = userInput;
+  if (conversationState === 'date') collectedData.date = userInput;
+  if (conversationState === 'slot') collectedData.slot = userInput;
+  if (conversationState === 'phone') userPhone = userInput;
+
+  const nextState = step.next;
+  const nextStep = demoFlow[nextState];
+
+  if (!nextStep) return;
+
+  // Special handling for slot checking (adds extra delay)
+  if (nextState === 'checking') {
+    const slotMsg = typeof step.bot === 'function' ? step.bot(userInput) : step.bot;
+    addMessage(slotMsg, 'bot', step.qrs || []);
+    conversationState = nextState;
+
+    setTimeout(() => {
+      showTyping();
+      setTimeout(() => {
+        removeTyping();
+        const checkMsg = typeof nextStep.bot === 'function' ? nextStep.bot(userInput) : nextStep.bot;
+        addMessage(checkMsg, 'bot', nextStep.qrs || []);
+        conversationState = nextStep.next;
+      }, 1800);
+    }, 600);
+    return;
+  }
+
+  const botMsg = typeof nextStep.bot === 'function' ? nextStep.bot(userInput) : nextStep.bot;
+  addMessage(botMsg, 'bot', nextStep.qrs || []);
+  conversationState = nextState;
+}
+
+// Init
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => {
+    const greet = demoFlow.greeting;
+    addMessage(greet.bot, 'bot', greet.qrs);
+    conversationState = 'name';
+  }, 600);
+});
+
+sendBtn.addEventListener('click', () => sendMessage());
+inputEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+});
+inputEl.addEventListener('input', () => {
+  inputEl.style.height = 'auto';
+  inputEl.style.height = Math.min(inputEl.scrollHeight, 80) + 'px';
+});
+
+function subscribeNewsletter() {
+  const email = document.getElementById('nl-email').value.trim();
+  if (!email || !email.includes('@')) { alert('Please enter a valid email.'); return; }
+  window.open('https://wa.me/919043616100?text=Hi%20Scalioz%2C%20please%20add%20me%20to%20the%20newsletter%3A%20' + encodeURIComponent(email), '_blank');
+  document.getElementById('nl-email').value = '';
+}
+</script>
+</body>
+</html>
