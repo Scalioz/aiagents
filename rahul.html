@@ -352,7 +352,7 @@ nav { background: white; border-bottom: 1px solid var(--gray-200); padding: 0 2r
 // ── RAHUL DEMO CHAT ───────────────────────────────────────────
 // This is a DEMO simulation — replace WEBHOOK_URL with Rahul's
 // real n8n webhook to make it fully live.
-const WEBHOOK_URL = 'YOUR_RAHUL_N8N_WEBHOOK_URL';
+const WEBHOOK_URL = 'https://scalioz.app.n8n.cloud/webhook/rahul-clinic-agent';
 const USE_LIVE = true; // Set to true once webhook is configured
 
 const messagesEl = document.getElementById('chat-messages');
@@ -460,7 +460,7 @@ async function sendMessage(text) {
   addMessage(text, 'user');
   sendBtn.disabled = true;
 
-  if (USE_LIVE && WEBHOOK_URL !== 'YOUR_RAHUL_N8N_WEBHOOK_URL') {
+  if (USE_LIVE && WEBHOOK_URL !== 'https://scalioz.app.n8n.cloud/webhook/rahul-clinic-agent') {
     // Live mode — call real webhook
     showTyping();
     try {
