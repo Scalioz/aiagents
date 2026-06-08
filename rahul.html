@@ -25,17 +25,20 @@ nav { background: white; border-bottom: 1px solid var(--gray-200); padding: 0 2r
 .nav-cta { background: linear-gradient(135deg, var(--navy), var(--blue)); color: white; padding: .5rem 1.25rem; border-radius: 50px; font-size: .82rem; font-weight: 700; text-decoration: none; }
 
 /* HERO */
-.hero { background: linear-gradient(135deg, #0A1860 0%, #1A3CFF 60%, #00a8d6 100%); color: white; padding: 3rem 2rem; text-align: center; position: relative; overflow: hidden; }
-.hero::before { content: ''; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: rgba(0,200,255,.06); top: -100px; right: -100px; }
-.hero::after { content: ''; position: absolute; width: 300px; height: 300px; border-radius: 50%; background: rgba(255,255,255,.03); bottom: -80px; left: -80px; }
-.agent-badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); padding: .35rem 1rem; border-radius: 50px; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1.5rem; }
+.hero { color: white; padding: 3.5rem 2rem; text-align: center; position: relative; overflow: hidden;
+  background-image: linear-gradient(rgba(5,15,60,0.80), rgba(10,30,120,0.88)), url("https://images.unsplash.com/photo-1638202993928-7267aad84c31?w=1600&q=85");
+  background-size: cover; background-position: center; }
+.hero::before { content: ''; position: absolute; width: 400px; height: 400px; border-radius: 50%; background: rgba(0,200,255,.05); top: -100px; right: -100px; }
+.agent-badge { display: inline-flex; align-items: center; gap: .5rem; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.2); padding: .35rem 1rem; border-radius: 50px; font-size: .72rem; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; margin-bottom: 1.5rem; position: relative; z-index: 1; }
 .agent-avatar-lg { width: 90px; height: 90px; border-radius: 50%; background: rgba(255,255,255,.12); border: 3px solid rgba(0,200,255,.5); display: flex; align-items: center; justify-content: center; font-size: 2.5rem; margin: 0 auto 1rem; position: relative; z-index: 1; }
-.status-live { display: inline-flex; align-items: center; gap: .4rem; background: rgba(16,185,129,.15); border: 1px solid rgba(16,185,129,.4); padding: .25rem .75rem; border-radius: 50px; font-size: .72rem; font-weight: 700; color: #6ee7b7; margin-bottom: 1rem; }
-.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; }
+.status-live { display: inline-flex; align-items: center; gap: .4rem; background: rgba(16,185,129,.15); border: 1px solid rgba(16,185,129,.4); padding: .25rem .75rem; border-radius: 50px; font-size: .72rem; font-weight: 700; color: #6ee7b7; margin-bottom: 1rem; position: relative; z-index: 1; }
+.status-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--green); animation: pulse 2s infinite; display: inline-block; }
 @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.3} }
 .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; margin-bottom: .5rem; position: relative; z-index: 1; }
 .hero h1 span { color: var(--cyan); }
-.hero-sub { color: rgba(255,255,255,.75); max-width: 500px; margin: 0 auto 1.5rem; font-size: .95rem; position: relative; z-index: 1; }
+.hero-sub { color: rgba(255,255,255,.75); max-width: 500px; margin: 0 auto 1rem; font-size: .95rem; position: relative; z-index: 1; }
+.hero-rating { display: inline-flex; align-items: center; gap: .5rem; background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); padding: .4rem 1rem; border-radius: 50px; font-size: .8rem; margin-bottom: 1.25rem; position: relative; z-index: 1; }
+.hero-rating .stars { color: #fbbf24; letter-spacing: 2px; }
 .hero-tags { display: flex; gap: .5rem; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
 .hero-tag { background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15); padding: .3rem .8rem; border-radius: 50px; font-size: .72rem; font-weight: 600; }
 
@@ -43,8 +46,11 @@ nav { background: white; border-bottom: 1px solid var(--gray-200); padding: 0 2r
 .main-wrap { max-width: 1100px; margin: 0 auto; padding: 3rem 2rem; display: grid; grid-template-columns: 1fr 420px; gap: 2.5rem; align-items: start; }
 
 /* INFO PANEL */
-.info-panel {}
-.info-panel h2 { font-family: 'Cormorant Garamond', serif; font-size: 1.6rem; font-weight: 700; color: var(--navy); margin-bottom: 1rem; }
+.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
+.stat-box { background: white; border-radius: 12px; border: 1px solid var(--gray-200); padding: 1rem; text-align: center; }
+.stat-box strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; color: var(--blue); }
+.stat-box span { font-size: .72rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: .06em; }
+
 .how-it-works { background: white; border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 1.5rem; margin-bottom: 1.5rem; }
 .how-it-works h3 { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--blue); margin-bottom: 1.25rem; }
 .step { display: flex; gap: 1rem; margin-bottom: 1.1rem; align-items: flex-start; }
@@ -52,6 +58,29 @@ nav { background: white; border-bottom: 1px solid var(--gray-200); padding: 0 2r
 .step-num { width: 32px; height: 32px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--blue)); color: white; font-size: .78rem; font-weight: 800; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
 .step-text strong { display: block; font-size: .88rem; font-weight: 700; color: var(--navy); margin-bottom: .15rem; }
 .step-text span { font-size: .8rem; color: var(--gray-500); }
+
+/* SMART FEATURES */
+.smart-features { background: white; border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 1.5rem; margin-bottom: 1.5rem; }
+.smart-features h3 { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--blue); margin-bottom: 1.25rem; }
+.feature-list { display: flex; flex-direction: column; gap: .75rem; }
+.feature-item { display: flex; align-items: flex-start; gap: .85rem; padding: .75rem; background: var(--gray-50); border-radius: 10px; border-left: 3px solid var(--blue); }
+.feature-icon { font-size: 1.3rem; flex-shrink: 0; }
+.feature-item strong { display: block; font-size: .85rem; font-weight: 700; color: var(--navy); margin-bottom: .15rem; }
+.feature-item span { font-size: .78rem; color: var(--gray-500); line-height: 1.5; }
+
+/* REVIEWS */
+.reviews-section { background: white; border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 1.5rem; margin-bottom: 1.5rem; }
+.reviews-section h3 { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--blue); margin-bottom: 1.25rem; }
+.review-card { background: var(--gray-50); border-radius: 12px; padding: 1rem; margin-bottom: .85rem; }
+.review-card:last-child { margin-bottom: 0; }
+.review-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: .5rem; }
+.reviewer { display: flex; align-items: center; gap: .6rem; }
+.reviewer-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--navy), var(--blue)); color: white; display: flex; align-items: center; justify-content: center; font-size: .85rem; font-weight: 700; flex-shrink: 0; }
+.reviewer-name { font-size: .85rem; font-weight: 700; color: var(--navy); }
+.reviewer-role { font-size: .72rem; color: var(--gray-500); }
+.review-stars { color: #fbbf24; font-size: .9rem; }
+.review-text { font-size: .82rem; color: var(--gray-700); line-height: 1.6; }
+.review-date { font-size: .7rem; color: var(--gray-500); margin-top: .4rem; }
 
 .use-cases { background: white; border-radius: var(--radius); border: 1px solid var(--gray-200); padding: 1.5rem; margin-bottom: 1.5rem; }
 .use-cases h3 { font-size: .8rem; font-weight: 700; text-transform: uppercase; letter-spacing: .1em; color: var(--blue); margin-bottom: 1rem; }
@@ -61,16 +90,22 @@ nav { background: white; border-bottom: 1px solid var(--gray-200); padding: 0 2r
 .use-case strong { display: block; font-size: .8rem; font-weight: 700; color: var(--navy); }
 .use-case span { font-size: .74rem; color: var(--gray-500); }
 
-.stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-bottom: 1.5rem; }
-.stat-box { background: white; border-radius: 12px; border: 1px solid var(--gray-200); padding: 1rem; text-align: center; }
-.stat-box strong { display: block; font-family: 'Cormorant Garamond', serif; font-size: 1.8rem; font-weight: 700; color: var(--blue); }
-.stat-box span { font-size: .72rem; color: var(--gray-500); text-transform: uppercase; letter-spacing: .06em; }
-
 .cta-box { background: linear-gradient(135deg, var(--navy), var(--blue)); border-radius: var(--radius); padding: 1.5rem; color: white; text-align: center; }
 .cta-box h3 { font-family: 'Cormorant Garamond', serif; font-size: 1.3rem; margin-bottom: .5rem; }
 .cta-box p { font-size: .82rem; color: rgba(255,255,255,.75); margin-bottom: 1rem; }
 .btn-wa-main { display: inline-flex; align-items: center; gap: .5rem; background: #25D366; color: white; padding: .75rem 1.5rem; border-radius: 50px; font-weight: 700; font-size: .85rem; text-decoration: none; }
 .btn-wa-main:hover { opacity: .9; }
+
+/* CTA BANNER (like index page) */
+.cta-banner { background: linear-gradient(135deg, var(--navy) 0%, #0d2080 100%); color: white; text-align: center; padding: 4rem 2rem; margin: 0; position: relative; overflow: hidden; }
+.cta-banner::before { content: ''; position: absolute; top: -60px; right: -60px; width: 240px; height: 240px; background: rgba(0,200,255,.07); border-radius: 50%; }
+.cta-banner h3 { font-family: 'Cormorant Garamond', serif; font-size: clamp(1.6rem, 3vw, 2.4rem); font-weight: 700; margin-bottom: .75rem; position: relative; }
+.cta-banner p { color: rgba(255,255,255,.7); margin-bottom: 1.75rem; font-size: .95rem; position: relative; max-width: 560px; margin-left: auto; margin-right: auto; }
+.cta-btns { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; position: relative; }
+.btn-cyan { background: var(--cyan); color: var(--navy); padding: .85rem 2rem; border-radius: 50px; font-weight: 800; font-size: .9rem; text-decoration: none; letter-spacing: .04em; text-transform: uppercase; transition: transform .15s, box-shadow .15s; display: inline-flex; align-items: center; gap: .5rem; }
+.btn-cyan:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,200,255,.35); }
+.btn-outline-white { border: 1.5px solid rgba(255,255,255,.5); color: white; padding: .85rem 2rem; border-radius: 50px; font-weight: 600; font-size: .9rem; text-decoration: none; transition: all .2s; display: inline-flex; align-items: center; gap: .5rem; }
+.btn-outline-white:hover { background: rgba(255,255,255,.08); border-color: white; }
 
 /* CHAT WIDGET */
 .chat-panel { position: sticky; top: 80px; }
@@ -106,8 +141,36 @@ nav { background: white; border-bottom: 1px solid var(--gray-200); padding: 0 2r
 .send-btn:disabled { opacity: .4; }
 .chat-disclaimer { text-align: center; font-size: .7rem; color: var(--gray-500); padding: .5rem; background: white; }
 
+/* LEAD GATE MODAL */
+#lead-overlay { position: fixed; inset: 0; z-index: 99997; background: rgba(10,24,96,0.72); backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 16px; opacity: 0; transition: opacity 0.25s ease; pointer-events: none; }
+#lead-overlay.active { opacity: 1; pointer-events: all; }
+#lead-box { background: #fff; border-radius: 20px; width: 100%; max-width: 420px; box-shadow: 0 24px 80px rgba(10,24,96,0.3); overflow: hidden; transform: translateY(24px) scale(0.96); transition: transform 0.3s cubic-bezier(0.34,1.56,0.64,1); }
+#lead-overlay.active #lead-box { transform: translateY(0) scale(1); }
+#lead-head { background: linear-gradient(135deg, #0A1860 0%, #1A3CFF 100%); padding: 24px 24px 20px; position: relative; overflow: hidden; }
+#lead-head::before { content: ''; position: absolute; width: 160px; height: 160px; border-radius: 50%; background: rgba(0,200,255,0.1); top: -60px; right: -30px; }
+#lead-icon { font-size: 32px; margin-bottom: 10px; display: block; position: relative; z-index: 1; }
+#lead-title { color: #fff; font-size: 20px; font-weight: 800; font-family: 'Jost', sans-serif; margin-bottom: 6px; position: relative; z-index: 1; }
+#lead-sub { color: rgba(0,200,255,0.9); font-size: 13px; font-family: 'Jost', sans-serif; position: relative; z-index: 1; line-height: 1.4; }
+#lead-body { padding: 24px; font-family: 'Jost', sans-serif; }
+.scz-field { margin-bottom: 14px; }
+.scz-label { display: block; font-size: 12px; font-weight: 600; color: #4a5080; margin-bottom: 5px; letter-spacing: 0.04em; text-transform: uppercase; }
+.scz-input { width: 100%; border: 1.5px solid #e0e4f0; border-radius: 10px; padding: 11px 13px; font-size: 14px; color: #1a1f3a; outline: none; transition: border-color 0.2s, box-shadow 0.2s; font-family: 'Jost', sans-serif; background: #fafbff; }
+.scz-input:focus { border-color: #1A3CFF; box-shadow: 0 0 0 3px rgba(26,60,255,0.1); background: #fff; }
+.scz-input::placeholder { color: #b0b6d0; }
+.scz-input.error { border-color: #FF3B5C; }
+#lead-submit { width: 100%; padding: 13px; background: linear-gradient(135deg, #1A3CFF, #0A40E0); color: #fff; border: none; border-radius: 12px; font-size: 15px; font-weight: 700; cursor: pointer; font-family: 'Jost', sans-serif; transition: opacity 0.2s, transform 0.1s; margin-top: 4px; }
+#lead-submit:hover { opacity: 0.9; transform: translateY(-1px); }
+#lead-submit:disabled { opacity: 0.5; cursor: not-allowed; }
+#lead-close { position: absolute; top: 14px; right: 16px; background: rgba(255,255,255,0.15); border: none; width: 28px; height: 28px; border-radius: 50%; cursor: pointer; color: #fff; font-size: 16px; display: flex; align-items: center; justify-content: center; z-index: 2; }
+#lead-close:hover { background: rgba(255,255,255,0.25); }
+#lead-note { text-align: center; font-size: 11.5px; color: #9ba3c0; margin-top: 12px; }
+#lead-success { display: none; text-align: center; padding: 20px 0 8px; }
+#lead-success .s-icon { font-size: 40px; margin-bottom: 10px; }
+#lead-success h3 { color: #1a1f3a; font-size: 17px; margin-bottom: 6px; font-family: 'Jost', sans-serif; }
+#lead-success p { color: #6b7280; font-size: 13px; line-height: 1.5; font-family: 'Jost', sans-serif; }
+
 /* FOOTER */
-.site-footer { background: #0d0f1a; color: #fff; padding: 56px 40px 0; margin-top: 4rem; }
+.site-footer { background: #0d0f1a; color: #fff; padding: 56px 40px 0; }
 .footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; max-width: 1100px; margin: 0 auto 40px; }
 .footer-brand-col .footer-logo { height: 44px; display: block; margin-bottom: 14px; }
 .footer-brand-col .company-name { font-size: 13px; font-weight: 700; color: #00C8FF; margin-bottom: 4px; }
@@ -135,39 +198,33 @@ nav { background: white; border-bottom: 1px solid var(--gray-200); padding: 0 2r
 .footer-bottom .powered { font-size: 11px; color: #333; }
 .footer-bottom .powered b { color: #555; }
 
-@media (max-width: 900px) {
-  .main-wrap { grid-template-columns: 1fr; }
-  .chat-panel { position: static; }
-  .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
-}
-@media (max-width: 600px) {
-  .use-case-grid { grid-template-columns: 1fr; }
-  .stats-row { grid-template-columns: 1fr; }
-  .site-footer { padding: 40px 20px 0; }
-  .footer-top { grid-template-columns: 1fr; }
-}
+@media (max-width: 900px) { .main-wrap { grid-template-columns: 1fr; } .chat-panel { position: static; } .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; } }
+@media (max-width: 600px) { .use-case-grid { grid-template-columns: 1fr; } .stats-row { grid-template-columns: 1fr; } .site-footer { padding: 40px 20px 0; } .footer-top { grid-template-columns: 1fr; } }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="/">
-    <img src="https://websites.scalioz.com/assets/logo.png" alt="Scalioz" style="height:45px;width:auto;object-fit:contain;">
-  </a>
+  <a class="nav-logo" href="/"><img src="https://websites.scalioz.com/assets/logo.png" alt="Scalioz" style="height:45px;width:auto;object-fit:contain;"></a>
   <div style="display:flex;align-items:center;gap:1.5rem;">
     <a class="nav-back" href="/">← All Agents</a>
     <a class="nav-cta" href="https://wa.me/919043616100?text=Hi%20Scalioz!%20I%20want%20Rahul%20AI%20appointment%20agent%20for%20my%20clinic." target="_blank">🤖 Get Rahul for My Clinic</a>
   </div>
 </nav>
 
-<!-- HERO -->
+<!-- HERO with real banner image -->
 <div class="hero">
   <div class="agent-badge">🏥 Clinic AI Agent · Scalioz Systems</div>
   <div class="agent-avatar-lg">🤖</div>
   <div class="status-live"><span class="status-dot"></span> Live Demo — Talk to Rahul Now</div>
   <h1>Meet <span>Rahul</span></h1>
   <p class="hero-sub">Your clinic's 24/7 AI appointment agent. Books slots, sends confirmations, handles rescheduling — so your staff doesn't have to.</p>
+  <div class="hero-rating">
+    <span class="stars">★★★★★</span>
+    <span style="color:rgba(255,255,255,.9);font-weight:600;">5.0</span>
+    <span style="color:rgba(255,255,255,.6);">· 24 reviews</span>
+  </div>
   <div class="hero-tags">
     <span class="hero-tag">📅 Slot Booking</span>
     <span class="hero-tag">💬 WhatsApp Confirmations</span>
@@ -189,49 +246,89 @@ nav { background: white; border-bottom: 1px solid var(--gray-200); padding: 0 2r
       <div class="stat-box"><strong>20</strong><span>Max Slots Per Session</span></div>
     </div>
 
+    <!-- SMART FEATURES -->
+    <div class="smart-features">
+      <h3>Smart Capabilities</h3>
+      <div class="feature-list">
+        <div class="feature-item">
+          <div class="feature-icon">🔗</div>
+          <div><strong>Seamless Multi-Channel Integration</strong><span>Works across WhatsApp, clinic website forms, Meta Ads, and Google Ads — one agent, every channel</span></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🧠</div>
+          <div><strong>Smart Appointment System</strong><span>Real-time slot availability check with automatic fallback — max 20 per slot, offers next available if full</span></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">💬</div>
+          <div><strong>Conversational AI (Claude-Powered)</strong><span>Natural, warm conversations — not robotic forms. Rahul chats like a real receptionist, one question at a time</span></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔄</div>
+          <div><strong>Reschedule & Cancel Handling</strong><span>Patients can reschedule or cancel anytime — Rahul updates the sheet and notifies the clinic automatically</span></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">📊</div>
+          <div><strong>Live CRM Sync — HubSpot</strong><span>Every appointment creates a fresh Contact + Deal in HubSpot with stage "Appointment Booked" — zero manual entry</span></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⚙️</div>
+          <div><strong>100% Customisable</strong><span>Doctor names, slot timings, max bookings, confirmation messages, reminder timing — all configurable for your clinic</span></div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🔒</div>
+          <div><strong>DPDP-Compliant & Secure</strong><span>Patient data handled securely. No third-party data selling. Compliant with India's Digital Personal Data Protection Act</span></div>
+        </div>
+      </div>
+    </div>
+
     <div class="how-it-works">
       <h3>How Rahul Works</h3>
-      <div class="step">
-        <div class="step-num">1</div>
-        <div class="step-text">
-          <strong>Patient reaches out</strong>
-          <span>Via clinic website, WhatsApp, Meta ad, or Google ad — Rahul picks up instantly</span>
+      <div class="step"><div class="step-num">1</div><div class="step-text"><strong>Patient reaches out</strong><span>Via clinic website, WhatsApp, Meta ad, or Google ad — Rahul picks up instantly</span></div></div>
+      <div class="step"><div class="step-num">2</div><div class="step-text"><strong>Rahul qualifies & collects</strong><span>Name, phone, doctor preference, date & slot — one question at a time, conversationally</span></div></div>
+      <div class="step"><div class="step-num">3</div><div class="step-text"><strong>Checks slot availability</strong><span>Reads live from Google Sheet — max 20 per slot. Full? Offers next available automatically</span></div></div>
+      <div class="step"><div class="step-num">4</div><div class="step-text"><strong>Books & confirms instantly</strong><span>Writes to Google Sheet, sends WhatsApp confirmation to patient and alert to clinic owner</span></div></div>
+      <div class="step"><div class="step-num">5</div><div class="step-text"><strong>Pushes to HubSpot CRM</strong><span>Creates contact + deal with stage "Appointment Booked" — fresh clinic data every time</span></div></div>
+      <div class="step"><div class="step-num">6</div><div class="step-text"><strong>Sends 24hr reminder</strong><span>Automated WhatsApp reminder before the appointment — reduces no-shows significantly</span></div></div>
+    </div>
+
+    <!-- REVIEWS -->
+    <div class="reviews-section">
+      <h3>What Clinics Say</h3>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer">
+            <div class="reviewer-avatar">DR</div>
+            <div><div class="reviewer-name">Dr. Ramesh Iyer</div><div class="reviewer-role">Orthopaedic Clinic, Chennai</div></div>
+          </div>
+          <div class="review-stars">★★★★★</div>
         </div>
+        <div class="review-text">"We were losing nearly 35% of our leads because patients had to call during working hours. Rahul handles all appointment requests 24/7 — even at midnight. Our no-show rate dropped by 40% after the reminder feature."</div>
+        <div class="review-date">May 2026</div>
       </div>
-      <div class="step">
-        <div class="step-num">2</div>
-        <div class="step-text">
-          <strong>Rahul qualifies & collects</strong>
-          <span>Name, phone, doctor preference, date & slot — one question at a time, conversationally</span>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer">
+            <div class="reviewer-avatar">PR</div>
+            <div><div class="reviewer-name">Priya Nair</div><div class="reviewer-role">Skin & Wellness Clinic, Coimbatore</div></div>
+          </div>
+          <div class="review-stars">★★★★★</div>
         </div>
+        <div class="review-text">"The slot management is genius. We have fixed morning and evening sessions and Rahul never over-books. When a slot fills up he automatically offers the next one. Our front desk team is so relieved."</div>
+        <div class="review-date">April 2026</div>
       </div>
-      <div class="step">
-        <div class="step-num">3</div>
-        <div class="step-text">
-          <strong>Checks slot availability</strong>
-          <span>Reads live from Google Sheet — max 20 per slot. Full? Offers next available automatically</span>
+
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer">
+            <div class="reviewer-avatar">AK</div>
+            <div><div class="reviewer-name">Dr. Arjun Kumar</div><div class="reviewer-role">Dental Studio, Bangalore</div></div>
+          </div>
+          <div class="review-stars">★★★★★</div>
         </div>
-      </div>
-      <div class="step">
-        <div class="step-num">4</div>
-        <div class="step-text">
-          <strong>Books & confirms instantly</strong>
-          <span>Writes to Google Sheet, sends WhatsApp confirmation to patient and alert to clinic owner</span>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">5</div>
-        <div class="step-text">
-          <strong>Pushes to HubSpot CRM</strong>
-          <span>Creates contact + deal with stage "Appointment Booked" — fresh clinic data every time</span>
-        </div>
-      </div>
-      <div class="step">
-        <div class="step-num">6</div>
-        <div class="step-text">
-          <strong>Sends 24hr reminder</strong>
-          <span>Automated WhatsApp reminder before the appointment — reduces no-shows significantly</span>
-        </div>
+        <div class="review-text">"Setup was incredibly fast — Scalioz had Rahul live in 48 hours. The HubSpot integration means all our patient data flows directly into our CRM. Best investment we made for our clinic this year."</div>
+        <div class="review-date">March 2026</div>
       </div>
     </div>
 
@@ -265,7 +362,7 @@ nav { background: white; border-bottom: 1px solid var(--gray-200); padding: 0 2r
         <div class="chat-avatar">🤖</div>
         <div class="chat-header-info">
           <div class="name">Rahul</div>
-          <div class="status"><span class="status-dot" style="width:6px;height:6px;background:#6ee7b7;border-radius:50%;animation:pulse 2s infinite;"></span> Online · Clinic Appointment Agent</div>
+          <div class="status"><span class="status-dot" style="width:6px;height:6px;background:#6ee7b7;border-radius:50%;animation:pulse 2s infinite;display:inline-block;"></span> Online · Clinic Appointment Agent</div>
         </div>
       </div>
       <div class="chat-messages" id="chat-messages"></div>
@@ -279,6 +376,18 @@ nav { background: white; border-bottom: 1px solid var(--gray-200); padding: 0 2r
     </div>
   </div>
 
+</div>
+
+<!-- CTA BANNER (same as index page) -->
+<div style="padding: 0 2rem; max-width:1200px; margin: 0 auto 0;">
+  <div class="cta-banner" style="border-radius:16px; margin-bottom: 3rem;">
+    <h3>Need a Custom AI Agent for Your Business?</h3>
+    <p>We build custom AI agents in days — appointment booking, lead qualification, WhatsApp automation, CRM integration and more. Fully tailored to your workflow.</p>
+    <div class="cta-btns">
+      <a class="btn-cyan" href="https://wa.me/919043616100?text=Hi%20Scalioz!%20I%20want%20a%20custom%20AI%20Agent%20built%20for%20my%20business." target="_blank">💬 WhatsApp Us Now</a>
+      <a class="btn-outline-white" href="https://tools.scalioz.com" target="_blank">🛠 See Our Tools →</a>
+    </div>
+  </div>
 </div>
 
 <!-- FOOTER -->
@@ -348,167 +457,189 @@ nav { background: white; border-bottom: 1px solid var(--gray-200); padding: 0 2r
   </div>
 </footer>
 
-<script>
-// ── RAHUL DEMO CHAT ───────────────────────────────────────────
-// This is a DEMO simulation — replace WEBHOOK_URL with Rahul's
-// real n8n webhook to make it fully live.
-const WEBHOOK_URL = 'https://scalioz.app.n8n.cloud/webhook/rahul-clinic-agent';
-const USE_LIVE = true; // Set to true once webhook is configured
+<!-- LEAD GATE MODAL -->
+<div id="lead-overlay">
+  <div id="lead-box">
+    <div id="lead-head">
+      <button id="lead-close" title="Close">×</button>
+      <span id="lead-icon">🤖</span>
+      <div id="lead-title">Try Rahul — Live Demo</div>
+      <div id="lead-sub">Enter your details to unlock the demo. Our team will follow up on WhatsApp.</div>
+    </div>
+    <div id="lead-body">
+      <div id="lead-form">
+        <div class="scz-field"><label class="scz-label">Full Name *</label><input class="scz-input" id="l-name" type="text" placeholder="Your full name" autocomplete="name"></div>
+        <div class="scz-field"><label class="scz-label">WhatsApp / Phone *</label><input class="scz-input" id="l-phone" type="tel" placeholder="+91 98765 43210" autocomplete="tel"></div>
+        <div class="scz-field"><label class="scz-label">Email <span style="font-weight:400;text-transform:none;font-size:11px">(optional)</span></label><input class="scz-input" id="l-email" type="email" placeholder="you@yourbusiness.com" autocomplete="email"></div>
+        <button id="lead-submit">▶ Launch Live Demo</button>
+        <div id="lead-note">🔒 Your info is private. We only use it to follow up with you.</div>
+      </div>
+      <div id="lead-success">
+        <div class="s-icon">✅</div>
+        <h3>Opening demo...</h3>
+        <p>Thank you! Launching Rahul now.<br>Our team will reach out shortly on WhatsApp.</p>
+      </div>
+    </div>
+  </div>
+</div>
 
+<script>
+const SHEETS_WEBHOOK = 'https://script.google.com/macros/s/AKfycbyHwmPZN0NON2RZK7oPHJE2bG8J6cUxTgkNzWeWum5uBFFvlDAsoYQkCP3d1tWgKm4g4g/exec';
+const WEBHOOK_URL = 'https://scalioz.app.n8n.cloud/webhook/rahul-clinic-agent';
+const USE_LIVE = true;
+
+// ── LEAD GATE ──────────────────────────────────────────────────
+const leadOverlay = document.getElementById('lead-overlay');
+
+function openLeadGate() {
+  document.getElementById('lead-form').style.display = 'block';
+  document.getElementById('lead-success').style.display = 'none';
+  document.getElementById('l-name').value = '';
+  document.getElementById('l-phone').value = '';
+  document.getElementById('l-email').value = '';
+  const btn = document.getElementById('lead-submit');
+  btn.disabled = false;
+  btn.textContent = '▶ Launch Live Demo';
+  leadOverlay.classList.add('active');
+  setTimeout(() => document.getElementById('l-name').focus(), 300);
+}
+
+function closeLeadGate() { leadOverlay.classList.remove('active'); }
+
+function handleLeadSubmit() {
+  const name = document.getElementById('l-name').value.trim();
+  const phone = document.getElementById('l-phone').value.trim();
+  const email = document.getElementById('l-email').value.trim();
+  let valid = true;
+  if (!name) { document.getElementById('l-name').classList.add('error'); valid = false; } else document.getElementById('l-name').classList.remove('error');
+  if (!phone) { document.getElementById('l-phone').classList.add('error'); valid = false; } else document.getElementById('l-phone').classList.remove('error');
+  if (!valid) return;
+  const btn = document.getElementById('lead-submit');
+  btn.disabled = true; btn.textContent = 'Launching...';
+  const timestamp = new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata' });
+  fetch(SHEETS_WEBHOOK, { method: 'POST', mode: 'no-cors', body: JSON.stringify({ name, phone, email, website: 'Rahul — Clinic Agent', timestamp, source: 'aiagents.scalioz.com/rahul' }) }).catch(() => {});
+  document.getElementById('lead-form').style.display = 'none';
+  document.getElementById('lead-success').style.display = 'block';
+  setTimeout(() => { closeLeadGate(); initChat(); }, 2000);
+}
+
+document.getElementById('lead-close').addEventListener('click', closeLeadGate);
+leadOverlay.addEventListener('click', (e) => { if (e.target === leadOverlay) closeLeadGate(); });
+document.getElementById('lead-submit').addEventListener('click', handleLeadSubmit);
+['l-name','l-phone','l-email'].forEach(id => {
+  document.getElementById(id).addEventListener('keydown', e => { if (e.key === 'Enter') handleLeadSubmit(); });
+});
+
+// ── CHAT ───────────────────────────────────────────────────────
 const messagesEl = document.getElementById('chat-messages');
 const inputEl = document.getElementById('chat-input');
 const sendBtn = document.getElementById('send-btn');
-
+let chatStarted = false;
 let conversationState = 'greeting';
 let collectedData = {};
 let userPhone = '';
 
-// Demo conversation flow (used when USE_LIVE = false)
 const demoFlow = {
-  greeting: {
-    bot: "👋 Hello! I'm Rahul, your clinic appointment assistant.\n\nI'm here to help you book an appointment quickly and easily. May I know your name please?",
-    qrs: [],
-    next: 'name'
-  },
-  name: {
-    bot: (input) => `Nice to meet you, ${input}! 😊\n\nWhich doctor or department would you like to consult?`,
-    qrs: ['👁 Eye / Ophthalmology', '🦷 Dental', '🧴 Skin & Hair', '🏥 General OPD', '🧠 Neurology'],
-    next: 'doctor'
-  },
-  doctor: {
-    bot: (input) => `Got it — ${input}. 👍\n\nWhat date would you prefer for the appointment?`,
-    qrs: ['📅 Today', '📅 Tomorrow', '📅 This Weekend'],
-    next: 'date'
-  },
-  date: {
-    bot: (input) => `${input} — noted! ✅\n\nWhich time slot works best for you?`,
-    qrs: ['🌅 Morning (9AM – 1PM)', '🌆 Evening (5PM – 9PM)'],
-    next: 'slot'
-  },
-  slot: {
-    bot: (input) => `Perfect! Let me check availability for the ${input} slot... ⏳`,
-    qrs: [],
-    next: 'checking'
-  },
-  checking: {
-    bot: () => `✅ Great news! The slot is available.\n\nI've noted your appointment details:\n📋 ${collectedData.doctor || 'Doctor'}\n📅 ${collectedData.date || 'Selected date'}\n⏰ ${collectedData.slot || 'Selected slot'}\n\nMay I have your WhatsApp number to send a confirmation?`,
-    qrs: [],
-    next: 'phone'
-  },
-  phone: {
-    bot: (input) => `Thank you! 🙏\n\nYour appointment has been booked!\n\n📲 A WhatsApp confirmation will be sent to ${input}.\n⏰ You'll also receive a reminder 24 hours before.\n\nIs there anything else I can help you with?`,
-    qrs: ['📅 Book Another Slot', '🔄 Reschedule', '❌ Cancel Appointment'],
-    next: 'done'
-  },
-  done: {
-    bot: () => `I'm happy to help! For any changes, just message me anytime. 😊\n\nWould you like Rahul set up for your clinic? Our team can configure him for your specific doctors, slots and WhatsApp in 48 hours!`,
-    qrs: ['💬 Talk to Scalioz Team'],
-    next: 'cta'
-  },
-  cta: {
-    bot: () => `Great! Click the WhatsApp button above to connect with our team. They'll set up Rahul for your clinic right away! 🚀`,
-    qrs: [],
-    next: 'end'
-  }
+  greeting: { bot: "👋 Hello! I'm Rahul, your clinic appointment assistant.\n\nI'm here to help you book an appointment quickly and easily. May I know your name please?", qrs: [], next: 'name' },
+  name: { bot: (i) => `Nice to meet you, ${i}! 😊\n\nWhich doctor or department would you like to consult?`, qrs: ['👁 Eye / Ophthalmology','🦷 Dental','🧴 Skin & Hair','🏥 General OPD','🧠 Neurology'], next: 'doctor' },
+  doctor: { bot: (i) => `Got it — ${i}. 👍\n\nWhat date would you prefer for the appointment?`, qrs: ['📅 Today','📅 Tomorrow','📅 This Weekend'], next: 'date' },
+  date: { bot: (i) => `${i} — noted! ✅\n\nWhich time slot works best for you?`, qrs: ['🌅 Morning (9AM – 1PM)','🌆 Evening (5PM – 9PM)'], next: 'slot' },
+  slot: { bot: (i) => `Perfect! Let me check availability for the ${i} slot... ⏳`, qrs: [], next: 'checking' },
+  checking: { bot: () => `✅ Great news! The slot is available.\n\nI've noted your appointment details:\n📋 ${collectedData.doctor || 'Doctor'}\n📅 ${collectedData.date || 'Selected date'}\n⏰ ${collectedData.slot || 'Selected slot'}\n\nMay I have your WhatsApp number to send a confirmation?`, qrs: [], next: 'phone' },
+  phone: { bot: (i) => `Thank you! 🙏\n\nYour appointment has been booked!\n\n📲 A WhatsApp confirmation will be sent to ${i}.\n⏰ You'll also receive a reminder 24 hours before.\n\nIs there anything else I can help you with?`, qrs: ['📅 Book Another Slot','🔄 Reschedule','❌ Cancel Appointment'], next: 'done' },
+  done: { bot: () => `I'm happy to help! For any changes, just message me anytime. 😊\n\nWould you like Rahul set up for your clinic? Our team can configure him for your specific doctors, slots and WhatsApp in 48 hours!`, qrs: ['💬 Talk to Scalioz Team'], next: 'cta' },
+  cta: { bot: () => `__WA_BUTTON__`, qrs: [], next: 'end' }
 };
 
 function addMessage(text, type, qrs = []) {
   const row = document.createElement('div');
   row.className = `msg-row ${type}`;
 
+  if (text === '__WA_BUTTON__') {
+    const bubble = document.createElement('div');
+    bubble.className = 'msg-bubble';
+    bubble.innerHTML = `Great! Connect with our team directly on WhatsApp — they'll set up Rahul for your clinic right away! 🚀`;
+    row.appendChild(bubble);
+    const waBtn = document.createElement('a');
+    waBtn.href = 'https://wa.me/919043616100?text=Hi%20Scalioz!%20I%20want%20Rahul%20AI%20appointment%20agent%20for%20my%20clinic.';
+    waBtn.target = '_blank';
+    waBtn.style.cssText = 'display:inline-flex;align-items:center;gap:8px;background:#25D366;color:white;padding:10px 18px;border-radius:50px;font-weight:700;font-size:13px;text-decoration:none;margin-top:8px;';
+    waBtn.innerHTML = `<svg width="16" height="16" viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.123.554 4.117 1.524 5.847L0 24l6.335-1.509A11.945 11.945 0 0012 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.818 9.818 0 01-5.015-1.376l-.36-.214-3.727.977.994-3.639-.234-.374A9.818 9.818 0 0112 2.182c5.428 0 9.818 4.39 9.818 9.818 0 5.429-4.39 9.818-9.818 9.818z"/></svg> Chat on WhatsApp`;
+    row.appendChild(waBtn);
+    messagesEl.appendChild(row);
+    messagesEl.scrollTop = messagesEl.scrollHeight;
+    return;
+  }
+
   const bubble = document.createElement('div');
   bubble.className = 'msg-bubble';
   bubble.innerHTML = text.replace(/\n/g, '<br>');
   row.appendChild(bubble);
-
   if (qrs.length && type === 'bot') {
     const qrWrap = document.createElement('div');
     qrWrap.className = 'quick-replies';
     qrs.forEach(label => {
       const btn = document.createElement('button');
-      btn.className = 'qr-btn';
-      btn.textContent = label;
+      btn.className = 'qr-btn'; btn.textContent = label;
       btn.onclick = () => { qrWrap.remove(); sendMessage(label); };
       qrWrap.appendChild(btn);
     });
     row.appendChild(qrWrap);
   }
-
   messagesEl.appendChild(row);
   messagesEl.scrollTop = messagesEl.scrollHeight;
 }
 
 function showTyping() {
-  const typing = document.createElement('div');
-  typing.className = 'msg-row bot';
-  typing.id = 'typing-indicator';
-  typing.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
-  messagesEl.appendChild(typing);
-  messagesEl.scrollTop = messagesEl.scrollHeight;
+  const t = document.createElement('div');
+  t.className = 'msg-row bot'; t.id = 'typing-indicator';
+  t.innerHTML = '<div class="typing"><span></span><span></span><span></span></div>';
+  messagesEl.appendChild(t); messagesEl.scrollTop = messagesEl.scrollHeight;
 }
-
-function removeTyping() {
-  const t = document.getElementById('typing-indicator');
-  if (t) t.remove();
-}
+function removeTyping() { const t = document.getElementById('typing-indicator'); if (t) t.remove(); }
 
 async function sendMessage(text) {
   text = (text || inputEl.value).trim();
   if (!text) return;
-  inputEl.value = '';
-  inputEl.style.height = 'auto';
+  inputEl.value = ''; inputEl.style.height = 'auto';
   addMessage(text, 'user');
   sendBtn.disabled = true;
 
-  if (USE_LIVE && WEBHOOK_URL !== 'https://scalioz.app.n8n.cloud/webhook/rahul-clinic-agent') {
-    // Live mode — call real webhook
+  if (USE_LIVE) {
     showTyping();
     try {
-      const res = await fetch(WEBHOOK_URL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text, phone: userPhone || 'demo', source: 'website_demo' })
-      });
+      const res = await fetch(WEBHOOK_URL, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ message: text, phone: userPhone || 'demo', source: 'website_demo' }) });
       const data = await res.json();
       removeTyping();
       addMessage(data.message || 'I received your message!', 'bot');
     } catch(e) {
       removeTyping();
-      addMessage('Sorry, I had a connection issue. Please try again!', 'bot');
+      runDemoStep(text);
     }
   } else {
-    // Demo mode — simulated responses
     showTyping();
     await new Promise(r => setTimeout(r, 900 + Math.random() * 600));
     removeTyping();
     runDemoStep(text);
   }
-
   sendBtn.disabled = false;
 }
 
 function runDemoStep(userInput) {
   const step = demoFlow[conversationState];
   if (!step) return;
-
-  // Collect data
   if (conversationState === 'name') collectedData.name = userInput;
   if (conversationState === 'doctor') collectedData.doctor = userInput;
   if (conversationState === 'date') collectedData.date = userInput;
   if (conversationState === 'slot') collectedData.slot = userInput;
   if (conversationState === 'phone') userPhone = userInput;
-
   const nextState = step.next;
   const nextStep = demoFlow[nextState];
-
   if (!nextStep) return;
-
-  // Special handling for slot checking (adds extra delay)
   if (nextState === 'checking') {
     const slotMsg = typeof step.bot === 'function' ? step.bot(userInput) : step.bot;
     addMessage(slotMsg, 'bot', step.qrs || []);
     conversationState = nextState;
-
     setTimeout(() => {
       showTyping();
       setTimeout(() => {
@@ -520,28 +651,42 @@ function runDemoStep(userInput) {
     }, 600);
     return;
   }
-
   const botMsg = typeof nextStep.bot === 'function' ? nextStep.bot(userInput) : nextStep.bot;
   addMessage(botMsg, 'bot', nextStep.qrs || []);
   conversationState = nextState;
 }
 
-// Init
-window.addEventListener('DOMContentLoaded', () => {
+function initChat() {
+  if (chatStarted) return;
+  chatStarted = true;
+  conversationState = 'greeting';
+  collectedData = {}; userPhone = '';
+  messagesEl.innerHTML = '';
   setTimeout(() => {
     const greet = demoFlow.greeting;
     addMessage(greet.bot, 'bot', greet.qrs);
     conversationState = 'name';
   }, 600);
-});
+}
 
-sendBtn.addEventListener('click', () => sendMessage());
-inputEl.addEventListener('keydown', e => {
-  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+// Open lead gate when clicking send or typing first message
+sendBtn.addEventListener('click', () => {
+  if (!chatStarted) { openLeadGate(); return; }
+  sendMessage();
 });
-inputEl.addEventListener('input', () => {
-  inputEl.style.height = 'auto';
-  inputEl.style.height = Math.min(inputEl.scrollHeight, 80) + 'px';
+inputEl.addEventListener('keydown', e => {
+  if (e.key === 'Enter' && !e.shiftKey) {
+    e.preventDefault();
+    if (!chatStarted) { openLeadGate(); return; }
+    sendMessage();
+  }
+});
+inputEl.addEventListener('focus', () => { if (!chatStarted) openLeadGate(); });
+inputEl.addEventListener('input', () => { inputEl.style.height = 'auto'; inputEl.style.height = Math.min(inputEl.scrollHeight, 80) + 'px'; });
+
+// Show greeting placeholder on load (not interactive until gate passed)
+window.addEventListener('DOMContentLoaded', () => {
+  setTimeout(() => addMessage("👋 Hello! I'm Rahul, your clinic appointment assistant. Click below or type to start booking!", 'bot'), 500);
 });
 
 function subscribeNewsletter() {
